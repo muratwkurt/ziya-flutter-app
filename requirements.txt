@@ -2,3 +2,5 @@ flask
 requests
 assemblyai
 elevenlabs
+flask
+flask-cors
