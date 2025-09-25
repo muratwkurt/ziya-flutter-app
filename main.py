@@ -87,3 +87,22 @@ def ziya_hello():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import os
+
+app = Flask(__name__)
+CORS(app)  # CORS açıldı
+
+@app.route("/", methods=["GET", "POST"])
+def home():
+    if request.method == "GET":
+        return jsonify({"message": "Ziya çalışıyor! GET başarılı."})
+    elif request.method == "POST":
+        data = request.json
+        user_message = data.get("message", "")
+        return jsonify({"response": f"Merhaba Murat! Sen şöyle dedin: {user_message}"})
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
